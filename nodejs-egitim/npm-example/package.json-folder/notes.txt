@@ -1,0 +1,6 @@
+//npm install nodemailer --save 
+//var olan package.json dosyasina eklemek icin.
+//diyelim ki app2 adında bir klasörümüz var ve biz tek tek npm install crypto vs yazmak yerine
+npm install 
+dediğimizde package.json 
+içerisindeki tüm bağımlılıklar yüklenmiş olacaktır.

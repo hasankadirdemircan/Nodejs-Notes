@@ -1,0 +1,14 @@
+{
+  "name": "script-define",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "start":"node app",
+    "sayHello":"echo 'merhaba'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
