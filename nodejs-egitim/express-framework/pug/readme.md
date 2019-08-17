@@ -48,9 +48,9 @@
 - var name = 'hkdemircan'
 
 br
-| Temp : #{temp}
+| Temp : #{temp.toUpperCase()}
 br
-=name
+=name.toUpperCase()
 ```
 
 ​        
