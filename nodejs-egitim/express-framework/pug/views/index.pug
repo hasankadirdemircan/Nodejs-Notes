@@ -12,6 +12,15 @@ html
         =name.toUpperCase()
         hr
         =surname
+
+        hr
+        - var number = 12
+        if !number
+            | not found number.
+        else if number === 12
+            | number is 12
+        else
+            | number not same 12
         br
         span(style="color:white; background-color:red")
             | Hello #{name}
@@ -20,3 +29,9 @@ html
         include other.pug
         br
         include footer.pug
+
+        hr
+
+        ul
+            each val, index in ['zero', 'one', 'two']
+                li= index + ': ' + val
