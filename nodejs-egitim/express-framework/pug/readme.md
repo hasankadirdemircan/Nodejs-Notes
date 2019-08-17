@@ -53,4 +53,12 @@ br
 =name.toUpperCase()
 ```
 
-​        
+  ##### Layout
+
+<ul>
+  <li>layout pug tüm script,style dosyalarımız bulunabilir.</li>
+  <li>Bunları istediğimiz pug sayfalarına ekleyebiliriz.</li>
+</ul>.
+
+``` extends layout```
+
