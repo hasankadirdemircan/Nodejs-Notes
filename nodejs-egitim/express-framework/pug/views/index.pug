@@ -1,0 +1,22 @@
+html
+    head
+        title hello pug
+    body
+        //command line.
+        - var temp = 'değişken Tanımlama'
+        - var name = 'hkdemircan'
+
+        br
+        | Temp : #{temp.toLowerCase()}
+        br
+        =name.toUpperCase()
+        hr
+        =surname
+        br
+        span(style="color:white; background-color:red")
+            | Hello #{name}
+
+        br
+        include other.pug
+        br
+        include footer.pug
