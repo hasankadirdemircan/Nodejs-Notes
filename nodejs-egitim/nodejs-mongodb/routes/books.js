@@ -3,10 +3,20 @@ const router = express.Router();
 
 // exports ettigimiz model sinifini import ediyoruz.
 const Book = require('../models/Book');
-/* GET users listing. */
-router.get('/new', function(req, res, next) {
+/* GET post listing. */
+//http://localhost:3000/books/new
+router.post('/new', function(req, res, next) {
   const book = new Book({
-    title: 'Test Node.JS'
+    title: 'Test Node.JS',
+    published: false,
+    comments: [
+      {message: "harika."},
+      {message:"tavsiye ederim."}
+    ],
+    meta: {
+      votes: 10,
+      favs: 99
+    }
   });
 
   //mongodb'ye kayit islemi gerceklestiriyoruz.
