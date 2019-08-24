@@ -7,7 +7,8 @@ const Book = require('../models/Book');
 //http://localhost:3000/books/new
 router.post('/new', function(req, res, next) {
   const book = new Book({
-    title: 'Test Node.JS',
+    title: 'JAVA',
+    published: false,
     comments: [
       {message: "harika."},
       {message:"tavsiye ederim."}
@@ -25,6 +26,15 @@ router.post('/new', function(req, res, next) {
         console.log(err);
       res.json(data);
   })
+});
+
+//mongoDB'de arama islemi.
+router.get('/search', (req, res)=>{
+  //find icerisine aramak istedigim alanlari ekliyorum.
+  // 'comments' dedigimde sadece comments alanlari gelecektir.
+  Book.find({ published: false}, 'title comments', (err, data)=>{
+      res.json(data);
+  });
 });
 
 module.exports = router;
