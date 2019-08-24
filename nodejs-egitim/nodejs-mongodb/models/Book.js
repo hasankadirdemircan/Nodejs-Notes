@@ -5,9 +5,19 @@ const mongoose = require('mongoose');
 //schema olusturmak icin.
 const Schema = mongoose.Schema;
 
+/**
+ * type -> veri tipini belirtir.
+ * default -> varsayilan degeri belirtir.
+ * required -> olmazsa olmaz anlamina geliyor.
+ * unique -> essiz alan.
+ */
 const BookSchema = new Schema({
-    title: String,
-    published: Boolean,
+    title: {
+      type: String,
+      required: true,
+      unique:true
+    },
+
     //birden fazla yorum olabilir,
     //array tutuyoruz.
     //array yaptigimizda her obje icin
@@ -16,6 +26,14 @@ const BookSchema = new Schema({
     meta: {
       votes: Number,
       favs: Number
+    },
+    published: {
+      type: Boolean,
+      default: false
+    },
+    publishedAt: {
+      type: Date,
+      default: Date.now
     }
 });
 
