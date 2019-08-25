@@ -95,4 +95,19 @@ router.put('/updateSert', (req, res)=>{
     });
 });
 
+// id bazli update yapma.
+// findByIdAndUpdate
+// ilk parametre update edilecek id
+// ikinci parametre update edilecek alan ve yeni degeri.
+// değiştirilecek alan obje içerisinde ise 'obje.temp' şeklinde yaparız.('meta.favs')
+router.put('/updateById', (req, res)=>{
+  Book.findByIdAndUpdate('5d62d951f5668e491c89c01b',
+  {
+    title: 'Yeni Title',
+    'meta.favs': 4
+  }, (err, data)=>{
+    res.json(data);
+  });
+});
+
 module.exports = router;
