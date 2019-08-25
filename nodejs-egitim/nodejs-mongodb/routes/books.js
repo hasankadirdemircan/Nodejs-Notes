@@ -84,4 +84,15 @@ router.put('/updateMulti', (req, res)=>{
     });
 });
 
+//upsert keyword.
+// eger published alani false olan bir data bulamazsa kendisi yeni bir kayıt ekler.
+router.put('/updateSert', (req, res)=>{
+  Book.update(
+    {published: false},
+    {published: true},
+    {upsert: true}, (err, data)=>{
+      res.json(data);
+    });
+});
+
 module.exports = router;
