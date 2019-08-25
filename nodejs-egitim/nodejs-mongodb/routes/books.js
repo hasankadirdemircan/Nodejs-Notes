@@ -37,4 +37,20 @@ router.get('/search', (req, res)=>{
   });
 });
 
+router.get('/search/all', (req, res)=>{
+  //find icerisine bos obje gonderdigimde tum kayit gelir.
+  // 'comments' dedigimde sadece comments alanlari gelecektir.
+  Book.find({ }, 'title comments', (err, data)=>{
+      res.json(data);
+  });
+});
+
+//tekil arama, sadece ilk buldugu kayidi doner.
+//obje doner, array degil.
+//findOne
+router.get('/searchOne', (req, res)=>{
+  Book.findOne({title: "JAVA"}, (err, data)=>{
+    res.json(data);
+  });
+});
 module.exports = router;
