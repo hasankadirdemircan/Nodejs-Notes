@@ -53,4 +53,35 @@ router.get('/searchOne', (req, res)=>{
     res.json(data);
   });
 });
+
+// id bazli arama.
+//obje doner.
+//findById
+router.get('/searchById', (req, res)=>{
+  Book.findById("5d61a5b9a39e3d2f36b1963e", (err, data)=>{
+    res.json(data);
+  });
+});
+
+//update
+// published false olan alani true yap.
+// yalnizca ilk buldugu kayidi gunceller, hepsini degil.
+router.put('/updateOne', (req, res)=>{
+  Book.update(
+    {published: false},
+    {published: true}, (err, data)=>{
+      res.json(data);
+    });
+});
+
+//multi keyword ile tum datalar uzerinde update yapmiş oluruz.
+router.put('/updateMulti', (req, res)=>{
+  Book.update(
+    {published: false},
+    {published: true},
+    {multi: true}, (err, data)=>{
+      res.json(data);
+    });
+});
+
 module.exports = router;
