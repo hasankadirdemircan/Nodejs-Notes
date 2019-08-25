@@ -110,4 +110,37 @@ router.put('/updateById', (req, res)=>{
   });
 });
 
+// Delete işlemleri.
+
+/**
+ * findOne() => remove
+ * findOneAndRemove()
+ * remove()
+ */
+
+ // sileceğimiz data ile ilgili bi işlem yapılacaksa kullanılabilir.
+ router.delete('/remove', (req, res)=>{
+   Book.findById('5d62d951f5668e491c89c01b', (err, book) =>{
+     // bişeyler yapılabilir.
+     book.remove((err, data)=>{
+       res.json(data);
+     });
+   });
+ });
+
+ // bulunan ilk datayı siler.
+ // findOneAndRemove
+ router.delete('/findOneAndRemove', (req, res)=>{
+   Book.findOneAndRemove({published: true}, (err, data)=>{
+    res.json(data);
+   });
+ });
+
+ // published true olan tüm kayıtları siler.
+ router.delete('/removeAll', (req, res)=>{
+  Book.remove({published: true}, (err, data)=>{
+   res.json(data);
+  });
+});
+
 module.exports = router;
