@@ -15,9 +15,16 @@ const BookSchema = new Schema({
     title: {
       type: String,
       required: true,
-      unique:true
+      maxlength: [20, '{PATH} alanı ({VALUE}), ({MAXLENGTH}) karakterden kucuk olmali.'], //20 karakterden fazla girilemez. ikinci parametre hata mesajıdır.
+      minlength: [2, '{PATH} alanı ({VALUE}), ({MINKENGTH}) karakterden kucuk olmali.'] //20 karakterden fazla girilemez. ikinci parametre hata mesajıdır.
+     // unique:true
     },
 
+    year: {
+      type: Number,
+      max: 2000,
+      min: 1300
+    },
     //birden fazla yorum olabilir,
     //array tutuyoruz.
     //array yaptigimizda her obje icin

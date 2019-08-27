@@ -34,7 +34,18 @@ router.post('/new', function(req, res, next) {
 router.get('/search', (req, res)=>{
   //find icerisine aramak istedigim alanlari ekliyorum.
   // 'comments' dedigimde sadece comments alanlari gelecektir.
-  Book.find({ published: false}, 'title comments', (err, data)=>{
+  Book.find({ published: false}, 'title comments category', (err, data)=>{
+      res.json(data);
+  });
+});
+
+//mongoDB'de category alanı olmayanı getirme.
+router.get('/searchExists', (req, res)=>{
+  //find icerisine aramak istedigim alanlari ekliyorum.
+  // 'comments' dedigimde sadece comments alanlari gelecektir.
+  Book.find({ category: {
+    $exists: true //category field olanları getir.
+  }}, 'title comments category', (err, data)=>{
       res.json(data);
   });
 });
