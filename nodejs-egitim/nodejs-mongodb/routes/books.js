@@ -1,8 +1,10 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const router = express.Router();
 
 // exports ettigimiz model sinifini import ediyoruz.
 const Book = require('../models/Book');
+const User = require('../models/User');
 /* GET post listing. */
 //http://localhost:3000/books/new
 router.post('/new', function(req, res, next) {
@@ -170,4 +172,72 @@ router.get('/skip', (req, res)=>{
     res.json(data);
   }).skip(2);
 });
+
+// aggregate -> kümeleme
+// bir yazarın yazdığı kitaplardan 100 den fazla beğeni aldığı kitapları getir gibi.
+// $match -> eşleşenleri getirmek için.
+// $group -> istedigimiz bilgiye göre gruplayabiliriz.(kategori)
+router.get('/aggregate', (req, res)=>{
+  Book.aggregate([
+    {
+      $match: {
+        published: true
+      }
+    },
+    {
+      $group:{
+        _id: "$category",
+        adet: {$sum: 1}
+      }
+    }
+  ], (err, result)=>{
+    res.json(result);
+  });
+});
+
+//  aggreagete $lookup
+router.get('/aggregate-lookup', (req, res)=>{
+  Book.aggregate([
+    {
+      $match: {
+        _id: mongoose.Types.ObjectId('5d6566d8991e372c5edcf4e9')
+      }
+    },
+    {
+      $lookup: {
+        from: 'users', //hangi tablo
+        localField: 'userid', //hangi alanla eslesecek.
+        foreignField: '_id', //users tablosunda hangi id ile eslesecek.
+        as: 'user' // hangi degiskende tutulacak.
+      }
+    },
+    {
+      $unwind: '$user' //yukaridaki as user degiskenini aldik.
+    },
+    {//sadece title ve yazari gelsin.
+      $project: {
+        title: 1,
+        user: '$user'  //$user.fullname -> sadece user'ın fullname almak istersek.
+      }
+    }
+  ], (err, result)=>{
+    res.json(result);
+  });
+});
+
+//user create
+router.post('/user/new', function(req, res, next) {
+  const user = new User({
+    fullname: 'Demircan'
+  });
+
+  //mongodb'ye kayit islemi gerceklestiriyoruz.
+  //basarili olursa data json tipinde geri donduruyoruz.
+  user.save((err, data)=>{
+      if(err)
+        console.log(err);
+      res.json(data);
+  })
+});
+
 module.exports = router;
