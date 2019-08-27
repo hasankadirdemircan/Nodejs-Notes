@@ -153,4 +153,21 @@ router.get('/sort', (req, res)=>{
   }).sort({'meta.favs': -1});
 });
 // .sort({'title':1}) -> A-Z siralar.
+
+// limit ve skip kavramları
+// limit -> belli sayıda eleman ver.
+// skip -> belli elemanları geç sonrasını ver.
+router.get('/limit', (req, res)=>{
+  Book.find({}, (err, data)=>{
+    res.json(data);
+  }).limit(2);
+});
+
+// ikinci kayıttan sonra bir tane kayıt göster.
+// yani üçüncü kayıt.
+router.get('/skip', (req, res)=>{
+  Book.find({}, (err, data)=>{
+    res.json(data);
+  }).skip(2);
+});
 module.exports = router;
