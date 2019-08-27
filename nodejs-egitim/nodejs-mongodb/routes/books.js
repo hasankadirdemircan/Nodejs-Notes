@@ -7,7 +7,7 @@ const Book = require('../models/Book');
 //http://localhost:3000/books/new
 router.post('/new', function(req, res, next) {
   const book = new Book({
-    title: 'JAVA',
+    title: 'Üçüncü',
     published: false,
     comments: [
       {message: "harika."},
@@ -15,7 +15,7 @@ router.post('/new', function(req, res, next) {
     ],
     meta: {
       votes: 10,
-      favs: 99
+      favs: 98
     }
   });
 
@@ -143,4 +143,14 @@ router.put('/updateById', (req, res)=>{
   });
 });
 
+//sıralama servisi.
+// .sort icerisine hangi alana gore siralama yapmak istediğimizi yazıyoruz.
+// Eger küçükten büyüğe sıralama yapmak için -> 1
+// Büyükten küçüğe sıralamak için -> -1
+router.get('/sort', (req, res)=>{
+  Book.find({}, (err, data)=>{
+    res.json(data);
+  }).sort({'meta.favs': -1});
+});
+// .sort({'title':1}) -> A-Z siralar.
 module.exports = router;
